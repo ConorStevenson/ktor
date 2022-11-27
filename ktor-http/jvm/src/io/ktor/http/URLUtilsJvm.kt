@@ -10,6 +10,7 @@ import java.net.*
  * Take URI components from [uri]
  */
 public fun URLBuilder.takeFrom(uri: URI): URLBuilder {
+    uri.parseServerAuthority()
     uri.scheme?.let {
         protocol = URLProtocol.createOrDefault(it)
         port = protocol.defaultPort

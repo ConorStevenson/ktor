@@ -110,4 +110,13 @@ class URLBuilderTestJvm {
             takeFrom(URI("/test"))
         }.buildString().let { url -> assertEquals("http://localhost:9093/test", url) }
     }
+
+    @Test
+    fun testRejectInvalidServerHost() {
+        val uri = URI.create("http://invalid_hostname:8080/path")
+
+        assertFailsWith<URISyntaxException> {
+            URLBuilder().takeFrom(uri)
+        }
+    }
 }
